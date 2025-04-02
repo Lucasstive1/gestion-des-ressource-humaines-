@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Formations - BIAST</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./Css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="./images/[000022].jpg" alt="BIAST Logo" class="rounded-circle">
+                BIAST
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Gestion_personnel.html">Effectifs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="formation.html">Formations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ressource.html">Ressources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <a href="CONNEXION.HTML" class="btn btn-outline-light ms-lg-3">Connexion</a>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container2 animate__animated animate__fadeIn">
+        <h2 class="mb-4">Planification et Suivi des Formations</h2>
+
+        <!-- Filtres et actions -->
+        <div class="row mb-4">
+            <div class="col-md-4 mb-3">
+                <select class="form-select" id="filterStatus">
+                    <option value="all">Tous les statuts</option>
+                    <option value="pending">En attente</option>
+                    <option value="completed">Terminé</option>
+                    <option value="canceled">Annulé</option>
+                </select>
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="text" class="form-control" id="searchInput" placeholder="Rechercher une formation...">
+            </div>
+            <div class="col-md-4 mb-3 text-end">
+                <button class="btn btn-primary" id="addSessionBtn">
+                    <i class="fas fa-plus me-2"></i>Ajouter une session
+                </button>
+            </div>
+        </div>
+
+        <!-- Tableau des formations -->
+        <div class="table-responsive">
+            <table class="table table-bordered table-striped schedule-table">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Jour</th>
+                        <th>Heure</th>
+                        <th>Formation</th>
+                        <th>Professeur</th>
+                        <th>Salle</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Session 1 -->
+                    <tr class="session-row" data-status="pending">
+                        <td>Lundi</td>
+                        <td>
+                            <span class="start-time">08h00</span> - <span class="end-time">10h00</span>
+                        </td>
+                        <td>Mathématiques Avancées</td>
+                        <td>Jean Dupont</td>
+                        <td>Salle 101</td>
+                        <td>
+                            <span class="status-badge status-pending">En attente</span>
+                        </td>
+                        <td>
+                            <button class="btn-action btn-start pulse-animation" title="Démarrer la session">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="btn-action btn-complete" title="Terminer la session" disabled>
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn-action btn-cancel" title="Annuler la session">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <button class="btn-action btn-edit" title="Modifier" data-bs-toggle="modal"
+                                data-bs-target="#editModal">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Session 2 -->
+                    <tr class="session-row" data-status="completed">
+                        <td>Mardi</td>
+                        <td>
+                            <span class="start-time">10h00</span> - <span class="end-time">12h00</span>
+                        </td>
+                        <td>Physique Quantique</td>
+                        <td>Marie Curie</td>
+                        <td>Salle 203</td>
+                        <td>
+                            <span class="status-badge status-completed">Terminé</span>
+                        </td>
+                        <td>
+                            <button class="btn-action btn-start" title="Démarrer la session" disabled>
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="btn-action btn-complete" title="Terminer la session" disabled>
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn-action btn-cancel" title="Annuler la session" disabled>
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <button class="btn-action btn-edit" title="Voir les détails" data-bs-toggle="modal"
+                                data-bs-target="#detailsModal">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                    <!-- Session 3 -->
+                    <tr class="session-row" data-status="pending">
+                        <td>Mercredi</td>
+                        <td>
+                            <span class="start-time">14h00</span> - <span class="end-time">16h00</span>
+                        </td>
+                        <td>Informatique Appliquée</td>
+                        <td>Paul Martin</td>
+                        <td>Salle 305</td>
+                        <td>
+                            <span class="status-badge status-pending">En attente</span>
+                        </td>
+                        <td>
+                            <button class="btn-action btn-start pulse-animation" title="Démarrer la session">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="btn-action btn-complete" title="Terminer la session" disabled>
+                                <i class="fas fa-check"></i>
+                            </button>
+                            <button class="btn-action btn-cancel" title="Annuler la session">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <button class="btn-action btn-edit" title="Modifier" data-bs-toggle="modal"
+                                data-bs-target="#editModal">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section des statistiques -->
+        <div class="row mt-5">
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body text-center">
+                        <h3 class="text-primary"><i class="fas fa-chalkboard-teacher me-2"></i> Sessions cette semaine
+                        </h3>
+                        <h2 class="display-4">12</h2>
+                        <p class="text-muted">dont 8 terminées</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body text-center">
+                        <h3 class="text-success"><i class="fas fa-check-circle me-2"></i> Taux de complétion</h3>
+                        <h2 class="display-4">87%</h2>
+                        <p class="text-muted">+5% vs semaine dernière</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body text-center">
+                        <h3 class="text-warning"><i class="fas fa-clock me-2"></i> Temps moyen</h3>
+                        <h2 class="display-4">1h45</h2>
+                        <p class="text-muted">par session</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour démarrer une session -->
+    <div class="modal fade" id="startSessionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Démarrer la session</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="startSessionForm">
+                        <div class="mb-3">
+                            <label class="form-label">Formation</label>
+                            <input type="text" class="form-control" value="Mathématiques Avancées" readonly>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Heure de début</label>
+                                <input type="time" class="form-control" id="actualStartTime" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Heure prévue</label>
+                                <input type="text" class="form-control" value="08h00" readonly>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Commentaire (optionnel)</label>
+                            <textarea class="form-control" rows="3" placeholder="Notes sur la session..."></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Preuve de présence</label>
+                            <div class="upload-area" id="uploadStartProof">
+                                <i class="fas fa-camera"></i>
+                                <p>Cliquez pour ajouter une photo ou glissez-déposez un fichier</p>
+                                <img id="startProofPreview" class="preview-image" alt="Aperçu de l'image">
+                            </div>
+                            <input type="file" id="startProofInput" accept="image/*" style="display: none;">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="confirmStartBtn">Confirmer le début</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal pour terminer une session -->
+    <div class="modal fade" id="completeSessionModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Terminer la session</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="completeSessionForm">
+                        <div class="mb-3">
+                            <label class="form-label">Formation</label>
+                            <input type="text" class="form-control" value="Mathématiques Avancées" readonly>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Heure de début</label>
+                                <input type="text" class="form-control" value="08h15" readonly>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Heure de fin</label>
+                                <input type="time" class="form-control" id="actualEndTime" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Contenu couvert</label>
+                            <textarea class="form-control" rows="3" placeholder="Décrivez ce qui a été enseigné..."
+                                required></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Preuve de session</label>
+                            <div class="upload-area" id="uploadEndProof">
+                                <i class="fas fa-images"></i>
+                                <p>Ajoutez des photos du tableau ou des supports</p>
+                                <div id="endProofPreviews" class="d-flex flex-wrap gap-2"></div>
+                            </div>
+                            <input type="file" id="endProofInput" accept="image/*" multiple style="display: none;">
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Remarques supplémentaires</label>
+                            <textarea class="form-control" rows="2"
+                                placeholder="Problèmes rencontrés, observations..."></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-success" id="confirmCompleteBtn">Terminer la session</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de détails -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Détails de la session</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <h4>Physique Quantique</h4>
+                            <p class="text-muted">Mardi 10h00 - 12h00</p>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <span class="status-badge status-completed">Terminé</span>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5><i class="fas fa-info-circle me-2 text-primary"></i>Informations</h5>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <p><strong>Professeur:</strong> Marie Curie</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>Salle:</strong> 203</p>
+                            </div>
+                            <div class="col-md-4">
+                                <p><strong>Étudiants:</strong> 24</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5><i class="fas fa-clock me-2 text-primary"></i>Horaires réels</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <p><strong>Début:</strong> 10h05</p>
+                            </div>
+                            <div class="col-md-6">
+                                <p><strong>Fin:</strong> 11h50</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5><i class="fas fa-book me-2 text-primary"></i>Contenu couvert</h5>
+                        <p>Introduction à la mécanique quantique, principes de base, expérience de la double fente,
+                            principe d'incertitude de Heisenberg.</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5><i class="fas fa-camera me-2 text-primary"></i>Preuves de session</h5>
+                        <div class="row g-2" id="sessionProofs">
+                            <div class="col-md-4">
+                                <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+                                    class="img-fluid rounded" alt="Photo du tableau">
+                            </div>
+                            <div class="col-md-4">
+                                <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=300&q=80"
+                                    class="img-fluid rounded" alt="Supports de cours">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 mb-4 mb-lg-0">
+                <a href="#" class="footer-logo d-flex align-items-center">
+                    <img src="./images/[000022].jpg" alt="BIAST Logo" class="me-2 rounded-circle" style="width: 50px;">
+                    BIAST
+                </a>
+                <p class="text-muted mt-3" style="color: white;">La solution tout-en-un pour la gestion des établissements scolaires et des ressources pédagogiques.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                <div class="footer-links">
+                    <h4>Liens rapides</h4>
+                    <ul>
+                        <li><a href="#">Accueil</a></li>
+                        <li><a href="#">Fonctionnalités</a></li>
+                        <li><a href="#">Tarifs</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Blog</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                <div class="footer-links">
+                    <h4>Solutions</h4>
+                    <ul>
+                        <li><a href="#">Gestion du personnel</a></li>
+                        <li><a href="#">Formations</a></li>
+                        <li><a href="#">Ressources</a></li>
+                        <li><a href="#">Effectifs</a></li>
+                        <li><a href="#">Analytique</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="col-lg-4 col-md-4">
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <ul class="text-muted text-white">
+                        <li class="text-white"><i class="fas fa-map-marker-alt me-2"></i> Bafoussam || Face station Ola</li>
+                        <li class="text-white"><i class="fas fa-phone me-2"></i> +237 655969010/ +237 682829049</li>
+                        <li class="text-white"><i class="fas fa-envelope me-2"></i> contact@biast.fr</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p class="mb-0">&copy; 2025 BIAST. Tous droits réservés. | <a href="#" class="text-white">Mentions légales</a> | <a href="#" class="text-white">Politique de confidentialité</a></p>
+        </div>
+    </div>
+</footer>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Animation des boutons
+            $('.btn-action').hover(
+                function () {
+                    $(this).css('transform', 'translateY(-3px)');
+                },
+                function () {
+                    $(this).css('transform', 'translateY(0)');
+                }
+            );
+
+            // Gestion du filtre
+            $('#filterStatus').change(function () {
+                const status = $(this).val();
+                $('.session-row').hide();
+
+                if (status === 'all') {
+                    $('.session-row').show();
+                } else {
+                    $(`.session-row[data-status="${status}"]`).show();
+                }
+            });
+
+            // Recherche
+            $('#searchInput').keyup(function () {
+                const searchText = $(this).val().toLowerCase();
+
+                $('.session-row').each(function () {
+                    const rowText = $(this).text().toLowerCase();
+                    $(this).toggle(rowText.includes(searchText));
+                });
+            });
+
+            // Démarrer une session
+            $('.btn-start').click(function () {
+                $('#startSessionModal').modal('show');
+            });
+
+            // Terminer une session
+            $('.btn-complete').click(function () {
+                $('#completeSessionModal').modal('show');
+            });
+
+            // Annuler une session
+            $('.btn-cancel').click(function () {
+                if (confirm('Êtes-vous sûr de vouloir annuler cette session ?')) {
+                    const row = $(this).closest('tr');
+                    row.find('.status-badge')
+                        .removeClass('status-pending')
+                        .addClass('status-canceled')
+                        .text('Annulé');
+
+                    row.find('.btn-start, .btn-complete, .btn-cancel').prop('disabled', true);
+                    $(this).removeClass('pulse-animation');
+
+                    // Ici vous pourriez ajouter une requête AJAX pour sauvegarder l'état
+                }
+            });
+
+            // Upload d'image pour le début de session
+            $('#uploadStartProof').click(function () {
+                $('#startProofInput').click();
+            });
+
+            $('#startProofInput').change(function (e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        $('#startProofPreview').attr('src', event.target.result).show();
+                    }
+                    reader.readAsDataURL(file);
+                }
+            });
+
+            // Upload multiple pour la fin de session
+            $('#uploadEndProof').click(function () {
+                $('#endProofInput').click();
+            });
+
+            $('#endProofInput').change(function (e) {
+                const files = e.target.files;
+                $('#endProofPreviews').empty();
+
+                for (let i = 0; i < files.length; i++) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        $('#endProofPreviews').append(`
+                            <img src="${event.target.result}" class="img-thumbnail" style="width: 100px; height: 100px; object-fit: cover;">
+                        `);
+                    }
+                    reader.readAsDataURL(files[i]);
+                }
+            });
+
+            // Confirmer le début de session
+            $('#confirmStartBtn').click(function () {
+                // Validation
+                if (!$('#actualStartTime').val()) {
+                    alert('Veuillez indiquer l\'heure de début');
+                    return;
+                }
+
+                // Ici vous pourriez ajouter une requête AJAX pour sauvegarder
+
+                // Mise à jour de l'interface
+                const row = $('.btn-start.pulse-animation').closest('tr');
+                row.find('.status-badge')
+                    .removeClass('status-pending')
+                    .addClass('status-in-progress')
+                    .text('En cours');
+
+                row.find('.btn-start').removeClass('pulse-animation').prop('disabled', true);
+                row.find('.btn-complete').prop('disabled', false).addClass('pulse-animation');
+
+                $('#startSessionModal').modal('hide');
+                alert('Session démarrée avec succès !');
+            });
+
+            // Confirmer la fin de session
+            $('#confirmCompleteBtn').click(function () {
+                // Validation
+                if (!$('#actualEndTime').val()) {
+                    alert('Veuillez indiquer l\'heure de fin');
+                    return;
+                }
+
+                // Ici vous pourriez ajouter une requête AJAX pour sauvegarder
+
+                // Mise à jour de l'interface
+                const row = $('.btn-complete.pulse-animation').closest('tr');
+                row.find('.status-badge')
+                    .removeClass('status-in-progress')
+                    .addClass('status-completed')
+                    .text('Terminé');
+
+                row.find('.btn-complete').removeClass('pulse-animation').prop('disabled', true);
+
+                $('#completeSessionModal').modal('hide');
+                alert('Session terminée avec succès !');
+            });
+        });
+    </script>
+</body>
+
+</html>

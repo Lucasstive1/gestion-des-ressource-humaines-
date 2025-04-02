@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connexion Professionnelle - Bafoussam</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./Css/style.css">
+    <style>
+        .body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            margin: 0;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            animation: fadeIn 1s ease-in-out;
+            margin-top: 50px;
+        }
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            width: 100%;
+            max-width: 500px;
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+            position: relative;
+            z-index: 10;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card-header h3 {
+            font-weight: 600;
+            margin: 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to bottom right,
+                    rgba(255, 255, 255, 0.1) 0%,
+                    rgba(255, 255, 255, 0) 60%);
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .form-control {
+            height: 50px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+            padding-left: 45px;
+            transition: all 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+        }
+
+        .input-group-text {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 5;
+            background: transparent;
+            border: none;
+            color: var(--primary-color);
+        }
+
+        .btn-login {
+            background: var(--primary-color);
+            border: none;
+            height: 50px;
+            border-radius: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn-login:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .forgot-password {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .forgot-password:hover {
+            color: var(--secondary-color);
+            text-decoration: underline;
+        }
+
+        .social-login {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--light-color);
+            color: var(--dark-color);
+            margin: 0 5px;
+            transition: all 0.3s;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .facebook:hover {
+            background: #3b5998;
+            color: white;
+        }
+
+        .google:hover {
+            background: #db4437;
+            color: white;
+        }
+
+        .twitter:hover {
+            background: #1da1f2;
+            color: white;
+        }
+
+        .floating-bubbles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .bubble {
+            position: absolute;
+            bottom: -100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float linear infinite;
+        }
+
+        .location-map {
+            height: 200px;
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid #e0e0e0;
+            overflow: hidden;
+        }
+
+        .location-info {
+            margin-top: 10px;
+            font-size: 0.9rem;
+            color: #666;
+            text-align: center;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-1000px) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shine {
+            0% {
+                transform: rotate(30deg) translate(-10%, -10%);
+            }
+
+            100% {
+                transform: rotate(30deg) translate(10%, 10%);
+            }
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 576px) {
+            .login-card {
+                margin: 0 15px;
+            }
+
+            .card-body {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="body">
+        <!-- Navigation -->
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">
+                    <img src="./images/[000022].jpg" alt="BIAST Logo" class="rounded-circle">
+                    BIAST
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
+                        <li class="nav-item"><a class="nav-link" href="Gestion_personnel.html">Effectifs</a></li>
+                        <li class="nav-item"><a class="nav-link" href="formation.html">Formations</a></li>
+                        <li class="nav-item"><a class="nav-link" href="ressource.html">Ressources</a></li>
+                        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    </ul>
+                    <a href="CONNEXION.HTML" class="btn btn-outline-light ms-lg-3">Connexion</a>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Floating bubbles background -->
+        <div class="floating-bubbles">
+            <div class="bubble" style="left: 10%; width: 40px; height: 40px; animation-duration: 25s;"></div>
+            <div class="bubble" style="left: 20%; width: 20px; height: 20px; animation-duration: 20s;"></div>
+            <div class="bubble" style="left: 35%; width: 50px; height: 50px; animation-duration: 30s;"></div>
+            <div class="bubble" style="left: 50%; width: 30px; height: 30px; animation-duration: 22s;"></div>
+            <div class="bubble" style="left: 65%; width: 45px; height: 45px; animation-duration: 28s;"></div>
+            <div class="bubble" style="left: 80%; width: 25px; height: 25px; animation-duration: 18s;"></div>
+            <div class="bubble" style="left: 90%; width: 35px; height: 35px; animation-duration: 26s;"></div>
+        </div>
+
+        <div class="login-container">
+            <div class="login-card">
+                <div class="card-header">
+                    <h3><i class="fas fa-lock me-2"></i>Connexion Sécurisée</h3>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-4 position-relative">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                            <input type="email" class="form-control ps-5" placeholder="Adresse Email" required>
+                        </div>
+
+                        <div class="mb-4 position-relative">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                            <input type="password" class="form-control ps-5" placeholder="Mot de Passe" required>
+                        </div>
+
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Se souvenir de moi</label>
+                            <a href="#" class="forgot-password float-end">Mot de passe oublié?</a>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-login mb-3">
+                            <i class="fas fa-sign-in-alt me-2"></i>Se Connecter
+                        </button>
+
+
+                        <div class="text-center mb-3 mt-3">
+                            <span class="text-muted">Ou connectez-vous avec</span>
+                        </div>
+
+                        <div class="social-login">
+                            <a href="#" class="social-icon facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" class="social-icon google"><i class="fab fa-google"></i></a>
+                            <a href="#" class="social-icon twitter"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-center py-3">
+                    <p class="mb-0">Nouveau ici? <a href="#" class="text-primary">Créer un compte</a></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Animation supplémentaire pour les bulles
+        document.addEventListener('DOMContentLoaded', function () {
+            const bubblesContainer = document.querySelector('.floating-bubbles');
+
+            // Créer plus de bulles dynamiquement
+            for (let i = 0; i < 10; i++) {
+                const bubble = document.createElement('div');
+                bubble.classList.add('bubble');
+
+                // Position aléatoire
+                const leftPos = Math.random() * 100;
+
+                // Taille aléatoire entre 10px et 60px
+                const size = Math.random() * 50 + 10;
+
+                // Durée d'animation aléatoire entre 10s et 30s
+                const duration = Math.random() * 20 + 10;
+
+                // Délai aléatoire
+                const delay = Math.random() * 5;
+
+                bubble.style.left = `${leftPos}%`;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                bubble.style.animationDuration = `${duration}s`;
+                bubble.style.animationDelay = `${delay}s`;
+
+                bubblesContainer.appendChild(bubble);
+            }
+
+            // Animation au chargement
+            const loginCard = document.querySelector('.login-card');
+            loginCard.style.animation = 'fadeIn 1s ease-in-out';
+        });
+    </script>
+</body>
+
+</html>

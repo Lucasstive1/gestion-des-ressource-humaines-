@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Ressources - Institut</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./Css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="./images/[000022].jpg" alt="BIAST Logo" class="rounded-circle">
+                BIAST
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="Gestion_personnel.html">Effectifs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="formation.html">Formations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ressource.html">Ressources</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <a href="CONNEXION.HTML" class="btn btn-outline-light ms-lg-3">Connexion</a>
+            </div>
+        </div>
+    </nav>
+    
+
+    <div class="container4 animate__animated animate__fadeIn">
+        <h2 class="resource-header">Gestion des Ressources et Matériels</h2>
+
+        <!-- Statistiques -->
+        <div class="stats-container">
+            <div class="row">
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="stat-number">142</div>
+                    <div class="stat-label">Ressources totales</div>
+                </div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="stat-number">87%</div>
+                    <div class="stat-label">Disponibilité</div>
+                </div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="stat-number">18</div>
+                    <div class="stat-label">En maintenance</div>
+                </div>
+                <div class="col-md-3 col-6 stat-item">
+                    <div class="stat-number">94%</div>
+                    <div class="stat-label">Satisfaction</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filières -->
+        <div class="filiere-tabs">
+            <button class="filiere-tab active" data-filiere="all">Toutes les filières</button>
+            <button class="filiere-tab" data-filiere="informatique">Informatique</button>
+            <button class="filiere-tab" data-filiere="ingenierie">Ingénierie</button>
+            <button class="filiere-tab" data-filiere="sante">Santé</button>
+            <button class="filiere-tab" data-filiere="commerce">Commerce</button>
+        </div>
+
+        <!-- Ressources -->
+        <div class="row" id="resources-container">
+            <!-- Ressource 1 -->
+            <div class="col-lg-4 col-md-6" data-filiere="informatique">
+                <div class="resource-card">
+                    <span class="resource-badge">Informatique</span>
+                    <span class="resource-status status-available">Disponible</span>
+                    <img src="./images/informatique.jpg"
+                        class="resource-img" alt="Laboratoire informatique">
+                    <div class="resource-card-body">
+                        <h5 class="resource-title">Laboratoire Informatique #3</h5>
+                        <p class="resource-description">Salle équipée de 25 postes haut de gamme avec double écran,
+                            idéale pour les travaux pratiques de programmation.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-microchip me-2"></i>25 postes</span>
+                            <span><i class="fas fa-expand me-2"></i>60m²</span>
+                        </div>
+                        <div class="resource-actions">
+                            <button class="btn btn-reserve pulse-animation" data-bs-toggle="modal"
+                                data-bs-target="#reservationModal">
+                                <i class="fas fa-calendar-check me-2"></i>Réserver
+                            </button>
+                            <button class="btn btn-details" data-bs-toggle="modal" data-bs-target="#detailsModal">
+                                <i class="fas fa-info-circle me-2"></i>Détails
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ressource 2 -->
+            <div class="col-lg-4 col-md-6" data-filiere="ingenierie">
+                <div class="resource-card">
+                    <span class="resource-badge">Ingénierie</span>
+                    <span class="resource-status status-occupied">Occupé</span>
+                    <img src="./images/ateliers meca.jpg"
+                        class="resource-img" alt="Atelier mécanique">
+                    <div class="resource-card-body">
+                        <h5 class="resource-title">Atelier Mécanique</h5>
+                        <p class="resource-description">Espace dédié aux travaux pratiques de mécanique avec
+                            machines-outils modernes et zone de prototypage.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-tools me-2"></i>12 machines</span>
+                            <span><i class="fas fa-expand me-2"></i>120m²</span>
+                        </div>
+                        <div class="resource-actions">
+                            <button class="btn btn-reserve" disabled>
+                                <i class="fas fa-clock me-2"></i>Occupé jusqu'à 16h
+                            </button>
+                            <button class="btn btn-details" data-bs-toggle="modal" data-bs-target="#detailsModal">
+                                <i class="fas fa-info-circle me-2"></i>Détails
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ressource 3 -->
+            <div class="col-lg-4 col-md-6" data-filiere="sante">
+                <div class="resource-card">
+                    <span class="resource-badge">Santé</span>
+                    <span class="resource-status status-maintenance">Maintenance</span>
+                    <img src="./images/santé.jpg"
+                        class="resource-img" alt="Laboratoire médical">
+                    <div class="resource-card-body">
+                        <h5 class="resource-title">Labo d'Anatomie</h5>
+                        <p class="resource-description">Laboratoire équipé pour les travaux pratiques de médecine avec
+                            modèles anatomiques et équipements spécialisés.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-user-md me-2"></i>20 places</span>
+                            <span><i class="fas fa-expand me-2"></i>80m²</span>
+                        </div>
+                        <div class="resource-actions">
+                            <button class="btn btn-reserve" disabled>
+                                <i class="fas fa-tools me-2"></i>En maintenance
+                            </button>
+                            <button class="btn btn-details" data-bs-toggle="modal" data-bs-target="#detailsModal">
+                                <i class="fas fa-info-circle me-2"></i>Détails
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ressource 4 -->
+            <div class="col-lg-4 col-md-6" data-filiere="commerce">
+                <div class="resource-card">
+                    <span class="resource-badge">Hotellerie</span>
+                    <span class="resource-status status-available">Disponible</span>
+                    <img src="./images/hottelerie.jpg"
+                        class="resource-img" alt="Salle de conférence">
+                    <div class="resource-card-body">
+                        <h5 class="resource-title">Salle de Conférence</h5>
+                        <p class="resource-description">Espace moderne équipé pour les présentations professionnelles
+                            avec vidéoprojecteur 4K et système audio.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-users me-2"></i>40 places</span>
+                            <span><i class="fas fa-expand me-2"></i>90m²</span>
+                        </div>
+                        <div class="resource-actions">
+                            <button class="btn btn-reserve pulse-animation" data-bs-toggle="modal"
+                                data-bs-target="#reservationModal">
+                                <i class="fas fa-calendar-check me-2"></i>Réserver
+                            </button>
+                            <button class="btn btn-details" data-bs-toggle="modal" data-bs-target="#detailsModal">
+                                <i class="fas fa-info-circle me-2"></i>Détails
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ressource 5 -->
+            <div class="col-lg-4 col-md-6" data-filiere="informatique">
+                <div class="resource-card">
+                    <span class="resource-badge">Informatique</span>
+                    <span class="resource-status status-available">Disponible</span>
+                    <img src="./images/réseau.jpg"
+                        class="resource-img" alt="Salle serveurs">
+                    <div class="resource-card-body">
+                        <h5 class="resource-title">Salle Serveurs</h5>
+                        <p class="resource-description">Accès contrôlé aux serveurs de l'institut pour les travaux
+                            avancés en réseaux et administration système.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-server me-2"></i>8 racks</span>
+                            <span><i class="fas fa-expand me-2"></i>40m²</span>
+                        </div>
+                        <div class="resource-actions">
+                            <button class="btn btn-reserve" data-bs-toggle="modal" data-bs-target="#reservationModal">
+                                <i class="fas fa-calendar-check me-2"></i>Réserver
+                            </button>
+                            <button class="btn btn-details" data-bs-toggle="modal" data-bs-target="#detailsModal">
+                                <i class="fas fa-info-circle me-2"></i>Détails
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ressource 6 -->
+            <div class="col-lg-4 col-md-6" data-filiere="ingenierie">
+                <div class="resource-card">
+                    <span class="resource-badge">Ingénierie</span>
+                    <span class="resource-status status-available">Disponible</span>
+                    <img src="./images/elctrique.jpg"
+                        class="resource-img" alt="Labo électronique">
+                    <div class="resource-card-body">
+                        <h5 class="resource-title">Labo d'Électronique</h5>
+                        <p class="resource-description">Espace équipé pour le prototypage électronique avec
+                            oscilloscopes, générateurs de signaux et composants.</p>
+                        <div class="resource-meta">
+                            <span><i class="fas fa-bolt me-2"></i>15 postes</span>
+                            <span><i class="fas fa-expand me-2"></i>70m²</span>
+                        </div>
+                        <div class="resource-actions">
+                            <button class="btn btn-reserve pulse-animation" data-bs-toggle="modal"
+                                data-bs-target="#reservationModal">
+                                <i class="fas fa-calendar-check me-2"></i>Réserver
+                            </button>
+                            <button class="btn btn-details" data-bs-toggle="modal" data-bs-target="#detailsModal">
+                                <i class="fas fa-info-circle me-2"></i>Détails
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de réservation -->
+    <div class="modal fade" id="reservationModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Réservation de ressource</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="reservationForm">
+                        <div class="mb-3">
+                            <label class="form-label">Ressource</label>
+                            <input type="text" class="form-control" value="Laboratoire Informatique #3" readonly>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label class="form-label">Date</label>
+                                <input type="date" class="form-control" id="reservationDate" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Heure de début</label>
+                                <input type="time" class="form-control" id="startTime" required>
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label">Heure de fin</label>
+                                <input type="time" class="form-control" id="endTime" required>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Motif</label>
+                            <select class="form-select" id="reservationReason" required>
+                                <option value="" selected disabled>Choisir un motif</option>
+                                <option value="cours">Cours/TD/TP</option>
+                                <option value="projet">Projet étudiant</option>
+                                <option value="recherche">Recherche</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Description (optionnel)</label>
+                            <textarea class="form-control" rows="3"
+                                placeholder="Détails sur l'utilisation prévue..."></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Responsable</label>
+                            <input type="text" class="form-control" value="Prof. Jean Dupont" readonly>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="confirmReservationBtn">Confirmer la
+                        réservation</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de détails -->
+    <div class="modal fade" id="detailsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Détails de la ressource</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row mb-4">
+                        <div class="col-md-8">
+                            <h4>Laboratoire Informatique #3</h4>
+                            <p class="text-muted">Filière: Informatique</p>
+                        </div>
+                        <div class="col-md-4 text-end">
+                            <span class="status-badge status-available">Disponible</span>
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80"
+                                class="img-fluid rounded" alt="Laboratoire">
+                        </div>
+                        <div class="col-md-6">
+                            <h5><i class="fas fa-info-circle me-2 text-primary"></i>Description</h5>
+                            <p>Salle équipée de 25 postes haut de gamme avec double écran, idéale pour les travaux
+                                pratiques de programmation. Configuration: Intel i7, 16GB RAM, SSD 512GB, écrans 24"
+                                1080p.</p>
+
+                            <h5 class="mt-4"><i class="fas fa-cogs me-2 text-primary"></i>Équipements</h5>
+                            <ul>
+                                <li>25 postes informatiques</li>
+                                <li>Tableau interactif</li>
+                                <li>Vidéoprojecteur</li>
+                                <li>Switch réseau 1Gbps</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5><i class="fas fa-calendar-alt me-2 text-primary"></i>Prochaines réservations</h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th>Date</th>
+                                        <th>Heure</th>
+                                        <th>Responsable</th>
+                                        <th>Motif</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>15/06/2023</td>
+                                        <td>08h-10h</td>
+                                        <td>Prof. Martin</td>
+                                        <td>TP Programmation</td>
+                                    </tr>
+                                    <tr>
+                                        <td>15/06/2023</td>
+                                        <td>10h-12h</td>
+                                        <td>Prof. Lefèvre</td>
+                                        <td>Cours Bases de données</td>
+                                    </tr>
+                                    <tr>
+                                        <td>16/06/2023</td>
+                                        <td>14h-16h</td>
+                                        <td>Groupe A</td>
+                                        <td>Projet étudiant</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        <h5><i class="fas fa-map-marker-alt me-2 text-primary"></i>Localisation</h5>
+                        <p>Bâtiment C, 2ème étage, salle C203</p>
+                        <div class="ratio ratio-16x9">
+                            <img src="https://maps.googleapis.com/maps/api/staticmap?center=48.8566,2.3522&zoom=17&size=600x300&maptype=roadmap&markers=color:red%7C48.8566,2.3522&key=YOUR_API_KEY"
+                                class="img-fluid rounded" alt="Carte">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fermer</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 mb-4 mb-lg-0">
+                    <a href="#" class="footer-logo d-flex align-items-center">
+                        <img src="./images/[000022].jpg" alt="BIAST Logo" class="me-2 rounded-circle" style="width: 50px;">
+                        BIAST
+                    </a>
+                    <p class="text-muted mt-3" style="color: white;">La solution tout-en-un pour la gestion des établissements scolaires et des ressources pédagogiques.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h4>Liens rapides</h4>
+                        <ul>
+                            <li><a href="#">Accueil</a></li>
+                            <li><a href="#">Fonctionnalités</a></li>
+                            <li><a href="#">Tarifs</a></li>
+                            <li><a href="#">FAQ</a></li>
+                            <li><a href="#">Blog</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-4 mb-4 mb-md-0">
+                    <div class="footer-links">
+                        <h4>Solutions</h4>
+                        <ul>
+                            <li><a href="#">Gestion du personnel</a></li>
+                            <li><a href="#">Formations</a></li>
+                            <li><a href="#">Ressources</a></li>
+                            <li><a href="#">Effectifs</a></li>
+                            <li><a href="#">Analytique</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="col-lg-4 col-md-4">
+                    <div class="footer-links">
+                        <h4>Contact</h4>
+                        <ul class="text-muted text-white">
+                            <li class="text-white"><i class="fas fa-map-marker-alt me-2"></i> Bafoussam || Face station Ola</li>
+                            <li class="text-white"><i class="fas fa-phone me-2"></i> +237 655969010/ +237 682829049</li>
+                            <li class="text-white"><i class="fas fa-envelope me-2"></i> contact@biast.fr</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="mb-0">&copy; 2025 BIAST. Tous droits réservés. | <a href="#" class="text-white">Mentions légales</a> | <a href="#" class="text-white">Politique de confidentialité</a></p>
+            </div>
+        </div>
+    </footer>
+    
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            // Filtrage par filière
+            $('.filiere-tab').click(function () {
+                $('.filiere-tab').removeClass('active');
+                $(this).addClass('active');
+
+                const filiere = $(this).data('filiere');
+
+                if (filiere === 'all') {
+                    $('[data-filiere]').show();
+                } else {
+                    $('[data-filiere]').hide();
+                    $(`[data-filiere="${filiere}"]`).show();
+                }
+            });
+
+            // Confirmation de réservation
+            $('#confirmReservationBtn').click(function () {
+                // Validation
+                if (!$('#reservationDate').val() || !$('#startTime').val() || !$('#endTime').val() || !$('#reservationReason').val()) {
+                    alert('Veuillez remplir tous les champs obligatoires');
+                    return;
+                }
+
+                // Ici vous pourriez ajouter une requête AJAX pour sauvegarder
+
+                // Feedback
+                alert('Réservation confirmée avec succès !');
+                $('#reservationModal').modal('hide');
+                $('#reservationForm')[0].reset();
+            });
+
+            // Animation des cartes
+            $('.resource-card').hover(
+                function () {
+                    $(this).addClass('shadow-lg');
+                },
+                function () {
+                    $(this).removeClass('shadow-lg');
+                }
+            );
+
+            // Initialisation des dates
+            const today = new Date();
+            const dd = String(today.getDate()).padStart(2, '0');
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const yyyy = today.getFullYear();
+
+            $('#reservationDate').val(`${yyyy}-${mm}-${dd}`);
+        });
+    </script>
+</body>
+
+</html>
